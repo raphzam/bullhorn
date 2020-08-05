@@ -32,9 +32,10 @@
                 <a class="nav-link" href="#">Pricing</a>
             </li>
         </ul>
-        <span class="navbar-text">
-      Navbar text with an inline element
-    </span>
+        <div class="navbar-text" sec:authorize="isAuthenticated()">
+            You are logged in as:
+            <div sec:authentication="name"></div>
+        </div>
     </div>
 </nav>
 
@@ -86,9 +87,12 @@
                 [[${post.text}]]<br>
 
                 <div th:if="${post.author.username} == ${username}">
-                    <a href="#">Update</a><br>
-                    <a href="#">Edit</a>
-                    <a href="#">Delete</a>
+                    <a th:href="@{/updatepost/{id} (id=${post.id})}">Update</a><br>
+                    <a th:href="@{/deletepost/{id} (id=${post.id})}">Delete</a><br>
+                </div>
+
+                <div sec:authorize="hasRole('ADMIN')">
+                    <a th:href="@{/deletepost/{id} (id=${post.id})}">Delete</a>
                 </div>
 
 
@@ -103,12 +107,6 @@
 </div>
 
 
-<div sec:authorize="isAuthenticated()">
-
-    You are logged in as:
-    <div sec:authentication="name"></div>
-
-</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

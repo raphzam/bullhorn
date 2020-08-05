@@ -96,10 +96,20 @@ public class HomeController {
                 e.printStackTrace();
             }
         }
-
-
         postRepository.save(post);
 
+        return "redirect:/";
+    }
+
+    @RequestMapping("/updatepost/{id}")
+    public String updatePost(@PathVariable("id") long id, Model model){
+        model.addAttribute("post", postRepository.findById(id).get());
+        return "postform";
+    }
+
+    @RequestMapping("/deletepost/{id}")
+    public String deletePost(@PathVariable("id") long id, Model model){
+        postRepository.deleteById(id);
         return "redirect:/";
     }
 }

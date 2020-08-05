@@ -68,12 +68,16 @@
 
             <div th:each="post : ${posts}">
 
+
+                [[${post.author.username}]] says: <br>
+                [[${post.text}]]<br>
+
                 <div th:if="${post.media} != null">
                     <img th:src="${post.media}" width="60rem">
                 </div>
 
-                [[${post.author.username}]] says: <br>
-                [[${post.text}]]<br>
+                <br>
+                <br>
 
                 <div th:if="${post.author.username} == ${username}">
                     <a th:href="@{/updatepost/{id} (id=${post.id})}">Update</a><br>

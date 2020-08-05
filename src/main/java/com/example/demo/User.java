@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_table")
@@ -19,6 +20,9 @@ public class User {
 
     @Column(name = "enabled")
     private boolean enabled;
+
+    @OneToMany (mappedBy = "author")
+    private Set<Post> posts;
 
     public User() {
     }
@@ -58,5 +62,13 @@ public class User {
 
     public void clearPassword(){
         this.password="";
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 }

@@ -55,7 +55,7 @@ public class HomeController {
 
         userRepository.save(user);
         roleRepository.save(userRole);
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @RequestMapping("/login")
